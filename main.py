@@ -33,7 +33,7 @@ def contact():
 ###################################################################################
 
 def check_haarcascadefile():
-    exists = os.path.isfile("haarcascade_frontalface_default.xml")
+    exists = os.path.isfile("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/haarcascade_frontalface_default.xml")
     if exists:
         pass
     else:
@@ -43,10 +43,10 @@ def check_haarcascadefile():
 ###################################################################################
 
 def save_pass():
-    assure_path_exists("TrainingImageLabel/")
-    exists1 = os.path.isfile("TrainingImageLabel\psd.txt")
+    assure_path_exists("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/")
+    exists1 = os.path.isfile("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/psd.txt")
     if exists1:
-        tf = open("TrainingImageLabel\psd.txt", "r")
+        tf = open("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/psd.txt", "r")
         key = tf.read()
     else:
         master.destroy()
@@ -54,7 +54,7 @@ def save_pass():
         if new_pas == None:
             mess._show(title='No Password Entered', message='Password not set!! Please try again')
         else:
-            tf = open("TrainingImageLabel\psd.txt", "w")
+            tf = open("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/psd.txt", "w")
             tf.write(new_pas)
             mess._show(title='Password Registered', message='New password was registered successfully!!')
             return
@@ -63,7 +63,7 @@ def save_pass():
     nnewp = (nnew.get())
     if (op == key):
         if(newp == nnewp):
-            txf = open("TrainingImageLabel\psd.txt", "w")
+            txf = open("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/psd.txt", "w")
             txf.write(newp)
         else:
             mess._show(title='Error', message='Confirm new password again!!!')
@@ -107,17 +107,17 @@ def change_pass():
 #####################################################################################
 
 def psw():
-    assure_path_exists("TrainingImageLabel/")
-    exists1 = os.path.isfile("TrainingImageLabel\psd.txt")
+    assure_path_exists("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/")
+    exists1 = os.path.isfile("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/psd.txt")
     if exists1:
-        tf = open("TrainingImageLabel\psd.txt", "r")
+        tf = open("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/psd.txt", "r")
         key = tf.read()
     else:
         new_pas = tsd.askstring('Old Password not found', 'Please enter a new password below', show='*')
         if new_pas == None:
             mess._show(title='No Password Entered', message='Password not set!! Please try again')
         else:
-            tf = open("TrainingImageLabel\psd.txt", "w")
+            tf = open("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/psd.txt", "w")
             tf.write(new_pas)
             mess._show(title='Password Registered', message='New password was registered successfully!!')
             return
@@ -147,19 +147,19 @@ def clear2():
 def TakeImages():
     check_haarcascadefile()
     columns = ['SERIAL NO.', '', 'ID', '', 'NAME']
-    assure_path_exists("StudentDetails/")
-    assure_path_exists("TrainingImage/")
+    assure_path_exists("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/StudentDetails/")
+    assure_path_exists("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImage/")
     serial = 0
-    exists = os.path.isfile("StudentDetails\StudentDetails.csv")
+    exists = os.path.isfile("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/StudentDetails/StudentDetails.csv")
     if exists:
-        with open("StudentDetails\StudentDetails.csv", 'r') as csvFile1:
+        with open("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/StudentDetails/StudentDetails.csv", 'r') as csvFile1:
             reader1 = csv.reader(csvFile1)
             for l in reader1:
                 serial = serial + 1
         serial = (serial // 2)
         csvFile1.close()
     else:
-        with open("StudentDetails\StudentDetails.csv", 'a+') as csvFile1:
+        with open("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/StudentDetails/StudentDetails.csv", 'a+') as csvFile1:
             writer = csv.writer(csvFile1)
             writer.writerow(columns)
             serial = 1
@@ -168,19 +168,19 @@ def TakeImages():
     name = (txt2.get())
     if ((name.isalpha()) or (' ' in name)):
         cam = cv2.VideoCapture(0)
-        harcascadePath = "haarcascade_frontalface_default.xml"
+        harcascadePath = "/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/haarcascade_frontalface_default.xml"
         detector = cv2.CascadeClassifier(harcascadePath)
         sampleNum = 0
         while (True):
             ret, img = cam.read()
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
             faces = detector.detectMultiScale(gray, 1.3, 5)
             for (x, y, w, h) in faces:
                 cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
                 # incrementing sample number
                 sampleNum = sampleNum + 1
                 # saving the captured face in the dataset folder TrainingImage
-                cv2.imwrite("TrainingImage\ " + name + "." + str(serial) + "." + Id + '.' + str(sampleNum) + ".jpg",
+                cv2.imwrite("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImage/ " + name + "." + str(serial) + "." + Id + '.' + str(sampleNum) + ".jpg",
                             gray[y:y + h, x:x + w])
                 # display the frame
                 cv2.imshow('Taking Images', img)
@@ -194,7 +194,7 @@ def TakeImages():
         cv2.destroyAllWindows()
         res = "Images Taken for ID : " + Id
         row = [serial, '', Id, '', name]
-        with open('StudentDetails\StudentDetails.csv', 'a+') as csvFile:
+        with open('/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/StudentDetails/StudentDetails.csv', 'a+') as csvFile:
             writer = csv.writer(csvFile)
             writer.writerow(row)
         csvFile.close()
@@ -208,17 +208,17 @@ def TakeImages():
 
 def TrainImages():
     check_haarcascadefile()
-    assure_path_exists("TrainingImageLabel/")
+    assure_path_exists("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/")
     recognizer = cv2.face_LBPHFaceRecognizer.create()
-    harcascadePath = "haarcascade_frontalface_default.xml"
+    harcascadePath = "/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/haarcascade_frontalface_default.xml"
     detector = cv2.CascadeClassifier(harcascadePath)
-    faces, ID = getImagesAndLabels("TrainingImage")
+    faces, ID = getImagesAndLabels("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImage")
     try:
         recognizer.train(faces, np.array(ID))
     except:
         mess._show(title='No Registrations', message='Please Register someone first!!!')
         return
-    recognizer.save("TrainingImageLabel\Trainner.yml")
+    recognizer.save("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/Trainner.yml")
     res = "Profile Saved Successfully"
     message1.configure(text=res)
     message.configure(text='Total Registrations till now  : ' + str(ID[0]))
@@ -249,29 +249,29 @@ def getImagesAndLabels(path):
 
 def TrackImages():
     check_haarcascadefile()
-    assure_path_exists("Attendance/")
-    assure_path_exists("StudentDetails/")
+    assure_path_exists("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/Attendance/")
+    assure_path_exists("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/StudentDetails/")
     for k in tv.get_children():
         tv.delete(k)
     msg = ''
     i = 0
     j = 0
     recognizer = cv2.face.LBPHFaceRecognizer_create()  # cv2.createLBPHFaceRecognizer()
-    exists3 = os.path.isfile("TrainingImageLabel\Trainner.yml")
+    exists3 = os.path.isfile("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/rainner.yml")
     if exists3:
-        recognizer.read("TrainingImageLabel\Trainner.yml")
+        recognizer.read("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/TrainingImageLabel/Trainner.yml")
     else:
         mess._show(title='Data Missing', message='Please click on Save Profile to reset data!!')
         return
-    harcascadePath = "haarcascade_frontalface_default.xml"
+    harcascadePath = "/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(harcascadePath);
 
     cam = cv2.VideoCapture(0)
     font = cv2.FONT_HERSHEY_SIMPLEX
     col_names = ['Id', '', 'Name', '', 'Date', '', 'Time']
-    exists1 = os.path.isfile("StudentDetails\StudentDetails.csv")
+    exists1 = os.path.isfile("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/StudentDetails/StudentDetails.csv")
     if exists1:
-        df = pd.read_csv("StudentDetails\StudentDetails.csv")
+        df = pd.read_csv("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/StudentDetails/StudentDetails.csv")
     else:
         mess._show(title='Details Missing', message='Students details are missing, please check!')
         cam.release()
@@ -305,19 +305,19 @@ def TrackImages():
             break
     ts = time.time()
     date = datetime.datetime.fromtimestamp(ts).strftime('%d-%m-%Y')
-    exists = os.path.isfile("Attendance\Attendance_" + date + ".csv")
+    exists = os.path.isfile("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/Attendance/Attendance_" + date + ".csv")
     if exists:
-        with open("Attendance\Attendance_" + date + ".csv", 'a+') as csvFile1:
+        with open("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/Attendance/Attendance_" + date + ".csv", 'a+') as csvFile1:
             writer = csv.writer(csvFile1)
             writer.writerow(attendance)
         csvFile1.close()
     else:
-        with open("Attendance\Attendance_" + date + ".csv", 'a+') as csvFile1:
+        with open("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/Attendance/Attendance_" + date + ".csv", 'a+') as csvFile1:
             writer = csv.writer(csvFile1)
             writer.writerow(col_names)
             writer.writerow(attendance)
         csvFile1.close()
-    with open("Attendance\Attendance_" + date + ".csv", 'r') as csvFile1:
+    with open("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/Attendance/Attendance_" + date + ".csv", 'r') as csvFile1:
         reader1 = csv.reader(csvFile1)
         for lines in reader1:
             i = i + 1
@@ -410,9 +410,9 @@ lbl3 = tk.Label(frame1, text="Attendance",width=20  ,fg="black"  ,bg="#00aeff"  
 lbl3.place(x=100, y=115)
 
 res=0
-exists = os.path.isfile("StudentDetails\StudentDetails.csv")
+exists = os.path.isfile("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/StudentDetails/StudentDetails.csv")
 if exists:
-    with open("StudentDetails\StudentDetails.csv", 'r') as csvFile1:
+    with open("/mnt/d/Attendance_Management_System_with_face_recoginition_using_Python/StudentDetails/StudentDetails.csv", 'r') as csvFile1:
         reader1 = csv.reader(csvFile1)
         for l in reader1:
             res = res + 1
