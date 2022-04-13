@@ -19,9 +19,6 @@ FEATURES:
 MAIN SCREEN:
 ![Screenshot (28)](https://user-images.githubusercontent.com/52118965/138579143-dbd27699-b21a-4c1d-8476-806373ec69ed.png)
 
-TAKING ATTENDANCE:
-![Screenshot (26)](https://user-images.githubusercontent.com/52118965/138579155-7e4b2e2c-f6c3-4390-8fc7-d732f648be5f.png)
-
 SHOWING ATTENDANCE TAKEN:
 ![Screenshot (27)](https://user-images.githubusercontent.com/52118965/138579178-2608a655-3982-408e-b996-0feef0117153.png)
 
